@@ -1,6 +1,9 @@
 require 'pry'
 
 class Characters
+
+  attr_reader :characters
+  
   def characters
     @characters = 
                ["a", "b", "c", "d", "e", "f", "g", "h", "i", #0-8

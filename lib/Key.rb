@@ -70,21 +70,21 @@ attr_reader :date, :initial_key, :final_key, :date_offset, :key_offset, :summed_
     return @final_key 
   end 
 
-  def rotation_a
-    @rotation_a = define_final_key[0]
-  end 
+  # def rotation_a
+  #   @rotation_a = define_final_key[0]
+  # end 
 
-  def rotation_b
-    @rotation_b = define_final_key[1]
-  end 
+  # def rotation_b
+  #   @rotation_b = define_final_key[1]
+  # end 
 
-  def rotation_c
-    @rotation_c = define_final_key[2]
-  end 
+  # def rotation_c
+  #   @rotation_c = define_final_key[2]
+  # end 
 
-  def rotation_d
-    @rotation_d = define_final_key[3]
-  end 
+  # def rotation_d
+  #   @rotation_d = define_final_key[3]
+  # end 
 
 end 
 

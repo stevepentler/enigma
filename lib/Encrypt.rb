@@ -1,5 +1,5 @@
 require 'pry'
-require '../lib/Characters'
+require '../lib/characters'
 
 class Encrypt 
 
@@ -19,15 +19,18 @@ class Encrypt
 
   def assign_index_number
     split = @message.downcase.chars 
-    @collected_elements = []
-    characters = Characters.new.characters
-    binding.pry
-    split.each do |char|
-      if char == characters.each 
-        @collected_elements << char.find_index
-      end 
+      character_map = Characters.new
+      reference = character_map.characters
+      encrypted_digits = []
 
-    end
+     split.each do |letter|
+        encrypted_digits << reference.index(letter)
+      end
+    return encrypted_digits
+  end 
+
+  def rotate_encrypted_digits
+    @define_final_key 
   end 
 
   #add A to every 4th number in array (starting with 0) and if number >characters.length % characters.length
