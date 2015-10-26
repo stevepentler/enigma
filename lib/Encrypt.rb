@@ -1,15 +1,17 @@
 require 'pry'
 require '../lib/characters'
+require '../lib/Key'
 
 class Encrypt 
 
-  attr_accessor :message, :key, :date 
+  attr_accessor :message, :key, :date, :rotated_encrypted_digits
 
   #break string into characters
 
   def initialize(key, message)
     @key = key
     @message = message 
+    @rotated_encrypted_digits = rotated_encrypted_digits
   end 
 
   #put message into downcase numbers
@@ -30,19 +32,45 @@ class Encrypt
   end 
 
   def rotate_encrypted_digits
-    @define_final_key 
+    set = Key.new
+    rotated_encrypted_digits = []
+    final_key = set.define_final_key
+    assign_index_number.each do |num|
+      rotated_encrypted_digits << num + final_key[0]
+      final_key.rotate! 
+    end 
+    return rotated_encrypted_digits
+  end 
+  
+  # [51,21,31,38,68,22,41,56,44,38,59,32,36,32,41,20,38,
+ #18,60,56,69,51,27,33,35,51,60]
+
+  def normalize_encrypted_message
+    normalized_digits = []
+
+    rotate_encrypted_digits.each do |digit|
+      if digit.abs >38
+        normalized_digits << digit % 39 
+      else
+        normalized_digits << digit 
+      end 
+    end 
+    return normalized_digits
   end 
 
-  #add A to every 4th number in array (starting with 0) and if number >characters.length % characters.length
-  #add B to every 4th number in array (starting with 1) and if number >characters.length % characters.length
-  #add C to every 4th number in array (starting with 2) and if number >characters.length % characters.length
-  #add D to every 4th number in array (starting with 3) and if number >characters.length % characters.length
-  ##### need to account for when next number == nil 
-  ##### is it better to do ABCD to first 4 numbers until nil, or will that cause a problem 
-  ##### should there by an odd number of characters? 
-  
-  def adjust_index_number
+  def encrypted_message
+
   end 
+
+
+  #     encrypted_message << reference.value(digit)
+       
+  #       encrypted_message 
+  #   end 
+  #   binding.pry
+  #   return encrypted_message
+  # end 
+
 
   #reference character map and assign each number to character
   def reassign_to_character
