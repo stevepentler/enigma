@@ -4,20 +4,12 @@ require '../lib/Key'
 
 class Encrypt 
 
-  attr_accessor :message, :key, :date, :rotated_encrypted_digits
-
-  #break string into characters
+  attr_accessor :message, :key
 
   def initialize(key, message)
     @key = key
     @message = message 
-    @rotated_encrypted_digits = rotated_encrypted_digits
   end 
-
-  #put message into downcase numbers
-  #break string into array of characters
-  #iterate over array of characters - match to characters in Character Map
-  #if character matches character from Character Map, assign index number of Character Map 
 
   def assign_index_number
     split = @message.downcase.chars 
@@ -41,9 +33,9 @@ class Encrypt
     end 
     return rotated_encrypted_digits
   end 
+
+  #rotated_encrypted_digits [51, 21, 31, 38, 68, 51, 60, 24, 45, 17, 60, 57]
   
-  # [51,21,31,38,68,22,41,56,44,38,59,32,36,32,41,20,38,
- #18,60,56,69,51,27,33,35,51,60]
 
   def normalize_encrypted_message
     normalized_digits = []
@@ -54,28 +46,23 @@ class Encrypt
       else
         normalized_digits << digit 
       end 
-    end 
+    end
     return normalized_digits
   end 
 
-  def encrypted_message
+  #normalized_digits = [12, 21, 31, 38, 29, 12, 21, 24, 6, 17, 21, 18]
 
-  end 
+  def encrypt_message
+    character_map = Characters.new
+    reference = character_map.characters
+    encrypted_message = []
 
+    normalize_encrypted_message.each do |digit|
+      encrypted_message << reference.fetch(digit)
+    end 
+    return encrypted_message.join
+  end
 
-  #     encrypted_message << reference.value(digit)
-       
-  #       encrypted_message 
-  #   end 
-  #   binding.pry
-  #   return encrypted_message
-  # end 
-
-
-  #reference character map and assign each number to character
-  def reassign_to_character
-  end 
-
-
+  #encrypted_message = ["m", "v", "5", ",", "3", "m", "v", "y", "g", "r", "v", "s"]
 
 end 

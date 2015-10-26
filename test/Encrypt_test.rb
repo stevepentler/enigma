@@ -21,18 +21,23 @@ class EncryptTest < Minitest::Test
   end 
 
   def test_rotate_encrypted_digits
-    e = Encrypt.new(71215, "This iS iT")
+    e = Encrypt.new(71215, "This ..end..")
     assert_equal 51, e.rotate_encrypted_digits.first
-    assert_equal 33, e.rotate_encrypted_digits.last
+    assert_equal 57, e.rotate_encrypted_digits.last
+  end 
+
+  def test_normalized_message_accurate
+    e = Encrypt.new(71215, "This ..end..")
+    assert_equal 12, e.normalize_encrypted_message.first
+    assert_equal 18, e.normalize_encrypted_message.last
   end 
 
   def test_encrypted_message_accurate
-    e = Encrypt.new(71215, "This is my message. ..end..")
-    assert_equal 12, e.normalize_encrypted_message.first
-    assert_equal 21, e.normalize_encrypted_message.last
-
+    e = Encrypt.new(71215, "This ..end..")
+    assert_equal "m", e.encrypt_message[0]
+    assert_equal "v", e.encrypt_message[1]
+    assert_equal "s", e.encrypt_message[-1]
   end 
-
 
 
 
