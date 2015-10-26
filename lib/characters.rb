@@ -2,6 +2,7 @@ require 'pry'
 
 class Characters
   def characters
+    @characters = 
                ["a", "b", "c", "d", "e", "f", "g", "h", "i", #0-8
 
                 "j", "k", "l", "m", "n", "o", "p", "q", "r", #9-17
@@ -10,6 +11,7 @@ class Characters
 
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", #27-35
 
-                " ", ".", ","]                               #36-39
+                " ", ".", ","]                                #36-39    
+   return @characters                      
   end
 end
