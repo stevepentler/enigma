@@ -2,7 +2,7 @@ require 'pry'
 
 class Key
 
-attr_reader :date, :initial_key, :final_key, :date_offset, :key_offset, :summed_offsets
+attr_reader :date, :key, :final_key, :date_offset, :key_offset, :summed_offsets
 
   def initialize
     @time = Time.now.to_a
@@ -11,21 +11,21 @@ attr_reader :date, :initial_key, :final_key, :date_offset, :key_offset, :summed_
     @key_offset = key_offset
     @final_key = final_key
     @summed_offsets = summed_offsets
-    @initial_key = [7, 1, 2, 1, 5]
+    @key = [7, 1, 2, 1, 5]
     
 
     
     # 5.times do |array|           #if generating random key
-    #     @initial_key << rand(10)
+    #     @key << rand(10)
     # end
-    #   return @initial_key
+    #   return @key
   end
 
   def define_key_offset
     
     key_holder = []
     @key_offset = []
-    @initial_key.map do |integer|
+    @key.map do |integer|
       key_holder << integer.to_s
     end
     @key_offset << key_holder[0..1].join

@@ -22,21 +22,21 @@ class EncryptTest < Minitest::Test
 
   def test_rotate_encrypted_digits
     e = Encrypt.new(71215, "This ..end..")
-    assert_equal 51, e.rotate_encrypted_digits.first
-    assert_equal 57, e.rotate_encrypted_digits.last
+    assert_equal 51, e.shift.first
+    assert_equal 57, e.shift.last
   end 
 
   def test_normalized_message_accurate
     e = Encrypt.new(71215, "This ..end..")
-    assert_equal 12, e.normalize_encrypted_message.first
-    assert_equal 18, e.normalize_encrypted_message.last
+    assert_equal 12, e.normalize.first
+    assert_equal 18, e.normalize.last
   end 
 
   def test_encrypted_message_accurate
     e = Encrypt.new(71215, "This ..end..")
-    assert_equal "m", e.encrypt_message[0]
-    assert_equal "v", e.encrypt_message[1]
-    assert_equal "s", e.encrypt_message[-1]
+    assert_equal "m", e.assign_value[0]
+    assert_equal "v", e.assign_value[1]
+    assert_equal "s", e.assign_value[-1]
   end 
 
 

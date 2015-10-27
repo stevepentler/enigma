@@ -13,7 +13,7 @@ class KeyTest < Minitest::Test
 
   def test_initial_key_length
     set = Key.new
-    assert_equal 5, set.initial_key.length
+    assert_equal 5, set.key.length
   end
 
   def test_date_offset_length
@@ -37,6 +37,7 @@ class KeyTest < Minitest::Test
   end 
 
   def test_compare_rotations_with_final_key
+    skip
     set = Key.new 
     assert_equal set.rotation_a, set.define_final_key[0]
     assert_equal set.rotation_b, set.define_final_key[1]
@@ -45,6 +46,7 @@ class KeyTest < Minitest::Test
   end 
 
   def test_rotation_values
+    skip
     set = Key.new
     refute set.rotation_a.abs > 38
     refute set.rotation_b.abs > 38

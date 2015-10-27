@@ -23,24 +23,23 @@ class Encrypt
     return encrypted_digits
   end 
 
-  def rotate_encrypted_digits
+  def shift
     set = Key.new
-    rotated_encrypted_digits = []
+    shifted = []
     final_key = set.define_final_key
     assign_index_number.each do |num|
-      rotated_encrypted_digits << num + final_key[0]
+      shifted << num + final_key[0]
       final_key.rotate! 
     end 
-    return rotated_encrypted_digits
+    return shifted
   end 
 
-  #rotated_encrypted_digits [51, 21, 31, 38, 68, 51, 60, 24, 45, 17, 60, 57]
+  #shifted [51, 21, 31, 38, 68, 51, 60, 24, 45, 17, 60, 57]
   
 
-  def normalize_encrypted_message
+  def normalize
     normalized_digits = []
-
-    rotate_encrypted_digits.each do |digit|
+    shift.each do |digit|
       if digit.abs >38
         normalized_digits << digit % 39 
       else
@@ -52,17 +51,16 @@ class Encrypt
 
   #normalized_digits = [12, 21, 31, 38, 29, 12, 21, 24, 6, 17, 21, 18]
 
-  def encrypt_message
+  def assign_value
     character_map = Characters.new
     reference = character_map.characters
-    encrypted_message = []
-
-    normalize_encrypted_message.each do |digit|
-      encrypted_message << reference.fetch(digit)
+    value = []
+    normalize.each do |digit|
+      value << reference.fetch(digit)
     end 
-    return encrypted_message.join
+    return value.join
   end
 
-  #encrypted_message = ["m", "v", "5", ",", "3", "m", "v", "y", "g", "r", "v", "s"]
+  #value = ["m", "v", "5", ",", "3", "m", "v", "y", "g", "r", "v", "s"]
 
 end 
