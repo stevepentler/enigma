@@ -15,6 +15,17 @@ class Characters
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", #27-35
 
                 " ", ".", ","]                                #36-39    
-   return @characters                      
+   return @characters   
+
+     # def character_map
+  #   character_map = (' '..'z').to_a 
+  #  return character_map
+  # end   
+
+  # def character_map_length
+  #   character_map_length = character_map.length 
+  #   return character_map_length
+  # end  
+                     
   end
 end

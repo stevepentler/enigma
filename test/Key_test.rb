@@ -1,59 +1,38 @@
- require 'minitest'
+require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require '../lib/Key'
+require '../lib/Key_duplicate'
 require 'pry' 
 
-class KeyTest < Minitest::Test
+class KeyDuplicateTest < Minitest::Test
 
   def test_date_output
-    set = Key.new
-    assert_equal 4, set.define_date_offset.length
+    set = Key.new("This message ..end..", 71215)
+    assert_equal 4, set.date_offset.length
   end 
 
   def test_initial_key_length
-    set = Key.new
-    assert_equal 5, set.key.length
+    set = Key.new("This message ..end..", 71215)
+    assert_equal 5, set.key.to_s.length
   end
 
   def test_date_offset_length
-    set = Key.new 
-    assert_equal 4, set.define_date_offset.length
+    set = Key.new("This message ..end..", 71215)
+    assert_equal 4, set.date_offset.length
   end 
 
   def test_key_offset_length
-    set = Key.new
-    assert_equal 4, set.define_key_offset.length
+    set = Key.new("This message ..end..", 71215)
+    assert_equal 4, set.key_offset.length
   end 
 
   def test_final_offset_length
-    set = Key.new
-    assert_equal 4, set.define_final_key.length
+    set = Key.new("This message ..end..", 71215)
+    assert_equal 4, set.rotors.length
   end 
 
   def test_final_key_length
-    set = Key.new
-    assert_equal 4, set.define_final_key.length
+    set = Key.new("This message ..end..", 71215)
+    assert_equal 4, set.rotors.length
   end 
-
-  def test_compare_rotations_with_final_key
-    skip
-    set = Key.new 
-    assert_equal set.rotation_a, set.define_final_key[0]
-    assert_equal set.rotation_b, set.define_final_key[1]
-    assert_equal set.rotation_c, set.define_final_key[2]
-    assert_equal set.rotation_d, set.define_final_key[3]
-  end 
-
-  def test_rotation_values
-    skip
-    set = Key.new
-    refute set.rotation_a.abs > 38
-    refute set.rotation_b.abs > 38
-    refute set.rotation_c.abs > 38
-    refute set.rotation_d.abs > 38
-  end 
-
-  #91 characters
-
 end 
