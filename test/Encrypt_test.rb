@@ -39,9 +39,5 @@ class EncryptTest < Minitest::Test
     assert_equal "s", e.assign_value[-1]
   end 
 
-
-
-
-
 end 
 
