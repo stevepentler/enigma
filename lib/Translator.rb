@@ -1,11 +1,11 @@
 require 'pry'
-require '../lib/characters'
-require '../lib/Key'
+require './lib/characters'
+require './lib/Key'
 
 class Translator
 
-  def initialize(message, key = nil)
-    @key = Key.new(key)
+  def initialize(message, key = nil, date = Date.today)
+    @key = Key.new(key, date)
     @characters = Characters.new
     @message = message
     @rotors = @key.rotors

@@ -1,13 +1,13 @@
 require 'pry'
+require 'date'
 
 class Key
 
-attr_reader :key, :message
+attr_reader :key, :message, :date
 
-  def initialize( key = nil)
+  def initialize( key = nil, date = Date.today)
     @key = key
-    # @message = message 
-
+    @date = date
   end 
 
   def generate_key
@@ -32,7 +32,7 @@ attr_reader :key, :message
   end 
 
   def date_offset      #0225
-    #@date = Time.now.strftime("%d%m%y").to_i
+    #@date = date.strftime("%d%m%y").to_i
     @date = 271015
     squared_date = @date ** 2
     date_offsets = squared_date.to_s[-4..-1]
@@ -49,5 +49,3 @@ attr_reader :key, :message
     return rotations
   end 
 end 
-
-
