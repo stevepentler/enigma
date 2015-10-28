@@ -13,7 +13,8 @@ class Translator
 
   def assign_index_number
     indices = []
-    message = @message.chars
+    message = @message
+    message = @message.to_s.chars
     message.each do |character|
       indices << @characters.character_map.index(character)
     end 

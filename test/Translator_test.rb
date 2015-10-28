@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require '../lib/Translator'
+require './lib/Translator'
 require 'pry'
 
 class TranslatorTest < Minitest::Test
@@ -67,11 +67,27 @@ class TranslatorTest < Minitest::Test
   assert_equal "!", e.produce_encrypted_message[4] #1 => !
   end  
 
+  def test_produce_another_encrypted_message
+  e = Translator.new("This is so secret!! ..end..", 12345)
+  assert_equal "`", e.produce_encrypted_message[0] #75=>k
+  assert_equal "&", e.produce_encrypted_message[1] #85=>u
+  assert_equal "R", e.produce_encrypted_message[26]
+  assert_equal "`&2J,'<R$-DJq!;<%:ER:G.EpGR", e.produce_encrypted_message #1 => !
+  #`&2J,'<R$-DJq!;<%:ER:G.EpGR
+  end  
+
   def test_produce_decrypted_message
   e = Translator.new("$gP15", 71215)
   assert_equal "8", e.produce_decrypted_message[0]  # -67 % 91 = 24 => 8
   assert_equal "Y", e.produce_decrypted_message[1]  
   assert_equal "I", e.produce_decrypted_message[4]  #-50 % 91 = 41 => I
-  end  
+  end
 
+  def test_produce_another_decrypted_message
+  e = Translator.new("`&2J,'<R$-DJq!;<%:ER:G.EpGR", 12345)
+  assert_equal "T", e.produce_decrypted_message[0]
+  assert_equal "h", e.produce_decrypted_message[1]  
+  assert_equal ".", e.produce_decrypted_message[26]
+  assert_equal "This is so secret!! ..end..", e.produce_decrypted_message
+  end  
 end 
