@@ -14,6 +14,7 @@ class Encrypt
   def assign_index_number
     split = @message.downcase.chars 
       character_map = Characters.new
+      
       reference = character_map.characters 
       encrypted_digits = []
 

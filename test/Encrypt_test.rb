@@ -9,7 +9,7 @@ require 'pry'
 class EncryptTest < Minitest::Test
 
   def test_assign_character_to_number
-  e = Encrypt.new(71215, "This is my message. ..end..")
+  e = Key.new(71215, "This is my message. ..end..")
   assert_equal 19, e.assign_index_number.first
   assert_equal 37, e.assign_index_number.last
   assert_equal 36, e.assign_index_number[4]

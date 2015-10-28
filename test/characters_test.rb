@@ -4,25 +4,25 @@ require 'minitest/pride'
 require '../lib/Characters'
 require 'pry'
 
-
 class CharactersTest < Minitest::Test
 
   def test_refute_key_is_nil
     set = Characters.new
-    refute set.characters == nil
+    refute set.character_map == nil
   end
 
-  def test_number_of_characters
+  def test_character_map_length
     set = Characters.new
-    assert_equal 39, set.characters.length
+    assert_equal 91, set.character_map_length
   end
 
-  def test_set_only_valid_characters
+  def test_validate_characters
     set = Characters.new
-    assert set.characters.include?("k")
-    assert set.characters.include?(",")
-    refute set.characters.include?("K")
-    refute set.characters.include?("12")
-    refute set.characters.include?("  ")
+    assert set.character_map.include?("k")
+    assert set.character_map.include?(",")
+    assert set.character_map.include?(" ")
+    assert set.character_map.include?("K")
+    refute set.character_map.include?("12")
+    refute set.character_map.include?("  ")
   end
 end
