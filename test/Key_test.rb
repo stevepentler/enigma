@@ -11,9 +11,14 @@ class KeyDuplicateTest < Minitest::Test
     assert_equal 4, set.date_offset.length
   end 
 
-  def test_generate_date_if_not_added
+  def test_generate_key_if_not_added
     set = Key.new()
     assert_equal 5, set.generate_key
+  end 
+
+  def test_generate_key_if_zero
+    set = Key.new(00000)
+    assert set.generate_key
   end 
 
   def test_initial_key_length

@@ -28,27 +28,27 @@ class CrackTest < Minitest::Test
 
   def test_differences
     c = Crack.new("Pentler")       #84-78 = 6, 76 - 68 = 8
-    assert_equal [6, 8, 55, 68], c.find_difference
+    assert_equal [6, 8, 55, 68], c.find_offsets
   end 
 
   def test_differences_with_symbols #5 => 21 - 14 = 7
     c = Crack.new("$gP15")       
-    assert_equal [-7, -20, 3, 7], c.find_difference
+    assert_equal [84, 71, 3, 7], c.find_offsets
   end 
 
   def test_normalized_differences_without_changes
     c = Crack.new("Pentler")       
-    assert_equal [6, 8, 55, 68], c.normalize_offsets
+    assert_equal [6, 8, 55, 68], c.find_offsets
   end 
 
   def test_normalized_differences_with_negatives #g = 71
     c = Crack.new("$gP15")
-    assert_equal [84, 71, 3, 7], c.normalize_offsets
+    assert_equal [84, 71, 3, 7], c.find_offsets
   end 
 
   def test_original_modified_key_values_before_rotate
     c = Crack.new("$gP15")
-    assert_equal [84, 71, 3, 7],  c.normalize_offsets
+    assert_equal [84, 71, 3, 7],  c.find_offsets
   end 
 
   def test_rotations

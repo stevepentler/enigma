@@ -26,24 +26,18 @@ class Crack
     return indices.last(4)
   end 
 
-  def find_difference
+  def find_offsets
     end_pattern = [78, 68, 14, 14]
-    differences = intercepted_indices.map.with_index do |num, index|
-      num - end_pattern[index]
+    offsets = []
+    intercepted_indices.each_with_index do |num, index|
+      offsets << ((num - end_pattern[index]) % @characters.character_map_length)
       end 
-    return differences 
+    return offsets 
   end
-
- def normalize_offsets
-    offsets = find_difference.map do |num|
-      num % @characters.character_map_length
-      end 
-    return offsets
-  end 
   
   def rotated_differences
     adjust = (modulo_length * -1)
-    normalize_offsets.rotate!(adjust)
+    find_offsets.rotate!(adjust)
   end
 
   def crack_key

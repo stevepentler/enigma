@@ -20,49 +20,49 @@ class TranslatorTest < Minitest::Test
     assert_equal false, e.assign_index_number == nil
   end 
 
-  def test_encrypted_digit_length_accurate
+  def test_encrypted_digit_length_equals_message_length
   e = Translator.new("$gP15", 71215)
   assert_equal 5, e.assign_index_number.length
   end 
 
-  def test_rotate_encrypted_digits  
+  def test_rotate_encrypted_digits
     e = Translator.new("$gP15", 71215)
     assert_equal 75, e.rotate_encrypt[0] #($ = 4) + 71 (0date_offset) = 75
     assert_equal 85, e.rotate_encrypt[1] #(g = 71) + 14 (2date_offset)
     assert_equal 71, e.rotate_encrypt[2]
     assert_equal 37, e.rotate_encrypt[3]
-    assert_equal 92, e.rotate_encrypt[4] #(5 = 21) + 71 (0date_offset) = 92
+    assert_equal 1, e.rotate_encrypt[4] #(5 = 21) + 71 (0date_offset) = 92
   end 
 
   def test_rotate_decrypted_digits
     e = Translator.new("$gP15", 71215) 
-    assert_equal -67, e.rotate_decrypt[0] #($ = 4) - 71 (0date_offset) = -67
+    assert_equal 24, e.rotate_decrypt[0] #($ = 4) - 71 (0date_offset) = -67
     assert_equal 57, e.rotate_decrypt[1] #(g = 71) - 14 (2date_offset)
-    assert_equal -50, e.rotate_decrypt[4] #(5 = 21) - 71 (0date_offset) = -50
+    assert_equal 41, e.rotate_decrypt[4] #(5 = 21) - 71 (0date_offset) = -50
   end 
 
   def test_normalize_encrypted_message_indices_within_library_count
     e = Translator.new(" !", 71215) 
-    assert_equal 71, e.normalize_encrypted_message[0] #() + 71 (0dateoffset) = 71
-    assert_equal 15, e.normalize_encrypted_message[1] #(!) + 14 = 14
+    assert_equal 71, e.rotate_encrypt[0] #() + 71 (0dateoffset) = 71
+    assert_equal 15, e.rotate_encrypt[1] #(!) + 14 = 14
   end 
 
   def test_normalize_encrypted_message_indices_above_library_count
     e = Translator.new("zy", 71215) 
-    assert_equal 70, e.normalize_encrypted_message[0] #(z = 90) + 71 (0dateoffset) = 
-    assert_equal 12, e.normalize_encrypted_message[1] #(x = 89) + 14 % 91 = 12
+    assert_equal 70, e.rotate_encrypt[0] #(z = 90) + 71 (0dateoffset) = 
+    assert_equal 12, e.rotate_encrypt[1] #(x = 89) + 14 % 91 = 12
   end 
 
   def test_normalize_decrypted_message_indices_within_library_count
     e = Translator.new("zy", 71215) 
-    assert_equal 19, e.normalize_decrypted_message[0] #90 - 71 = 19
-    assert_equal 75, e.normalize_decrypted_message[1] #89 - 14 = 75
+    assert_equal 19, e.rotate_decrypt[0] #90 - 71 = 19
+    assert_equal 75, e.rotate_decrypt[1] #89 - 14 = 75
   end
 
   def test_normalize_decrypted_message_indices_below_library_count
     e = Translator.new(" !", 71215) 
-    assert_equal 20, e.normalize_decrypted_message[0] #( = 0) - 71 % 91 = 20
-    assert_equal 78, e.normalize_decrypted_message[1] #(! = 1) - 14 % 91 = 78
+    assert_equal 20, e.rotate_decrypt[0] #( = 0) - 71 % 91 = 20
+    assert_equal 78, e.rotate_decrypt[1] #(! = 1) - 14 % 91 = 78
   end   
 
   def test_produce_encrypted_message

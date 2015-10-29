@@ -11,7 +11,7 @@ attr_reader :key, :message, :date
   end 
 
   def generate_key
-    if @key == nil 
+    if @key == nil || @key == 0
       @key = []
       5.times do |array| 
         @key << rand(10)
