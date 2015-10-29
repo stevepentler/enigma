@@ -5,13 +5,14 @@ class Key
 
 attr_reader :key, :message, :date
 
-  def initialize( key = nil, date)
+  def initialize( key = nil, date = Date.today)
     @key = key
     @date = date
   end 
 
   def generate_key
     if @key == nil 
+      @key = []
       5.times do |array| 
         @key << rand(10)
       end 
@@ -30,10 +31,7 @@ attr_reader :key, :message, :date
     return key_offsets 
   end 
 
-
-
-  def date_offset      #0225 
-
+  def date_offset      #0225
     formatted_date = date.strftime("%d%m%y").to_i
     squared_date = formatted_date ** 2
     date_offsets = squared_date.to_s[-4..-1]

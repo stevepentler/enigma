@@ -17,7 +17,7 @@ class Translator
     message = @message.to_s.chars
     message.each do |character|
       indices << @characters.character_map.index(character)
-    end 
+      end 
     return indices 
   end 
 
@@ -27,7 +27,7 @@ class Translator
     assign_index_number.each do |index|
       shifted << index + rotor[0]
       rotor.rotate!
-    end 
+      end 
     return shifted
   end 
 
@@ -37,7 +37,7 @@ class Translator
     assign_index_number.each do |index|
       shifted << index - rotor[0]
       rotor.rotate! 
-    end 
+      end 
     return shifted
   end 
 
@@ -69,7 +69,7 @@ class Translator
     altered_message = []
     normalize_encrypted_message.each do |index|
       altered_message << @characters.character_map.fetch(index)
-    end 
+      end 
     return altered_message.join
   end 
 
@@ -77,7 +77,7 @@ class Translator
     altered_message = []
     normalize_decrypted_message.each do |index|
       altered_message << @characters.character_map.fetch(index)
-    end 
+      end 
     return altered_message.join
   end 
 

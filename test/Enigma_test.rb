@@ -23,5 +23,11 @@ class EnigmaTest < Minitest::Test
     output = e.decrypt("kugE!", 71215, Date.today)
     assert_equal "$gP15", output
   end
+
+  def test_crack_message
+    e = Enigma.new
+    output = e.crack("kugE!", Date.today)
+    assert_equal 787323, output
+  end 
   
 end 

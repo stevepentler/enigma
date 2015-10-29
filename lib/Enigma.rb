@@ -1,5 +1,6 @@
 require 'pry'
 require './lib/Translator'
+require './lib/Crack'
 
 class Enigma
 
@@ -13,11 +14,9 @@ class Enigma
     return t.produce_decrypted_message
   end 
 
-  
-  # def crack(message, date = Date.today)
-  #   c = Crack.new(message, date)
-  #   return c.crack_intercepted_message
-  # end
-
+  def crack(message, date = Date.today)
+    c = Crack.new(message, date)
+    return c.crack_key
+  end 
 
 end 

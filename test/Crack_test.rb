@@ -5,19 +5,6 @@ require './lib/Crack'
 require 'pry'
 
 class CrackTest < Minitest::Test
-#take intercepted message
-#figure out length of intercepted message------------
-#find modulo of intercepted message------------
-#create array of ..end.. index numbers alone
-#turn intercepted message into key indices
-#take last 4 characters of intercepted message and put in array
-#subtract known indices from intercepted indices
-
-  #case 
-    #modulo length = 1 
-    #[-5..-2]= key differences
-      #map through - modulo by character_map.length
-    #return letter
 
   def test_message_length
     c = Crack.new("Pentler")
@@ -51,17 +38,17 @@ class CrackTest < Minitest::Test
 
   def test_normalized_differences_without_changes
     c = Crack.new("Pentler")       
-    assert_equal [6, 8, 55, 68], c.normalize_differences
+    assert_equal [6, 8, 55, 68], c.normalize_offsets
   end 
 
   def test_normalized_differences_with_negatives #g = 71
     c = Crack.new("$gP15")
-    assert_equal [84, 71, 3, 7], c.normalize_differences
+    assert_equal [84, 71, 3, 7], c.normalize_offsets
   end 
 
   def test_original_modified_key_values_before_rotate
     c = Crack.new("$gP15")
-    assert_equal [84, 71, 3, 7],  c.normalize_differences
+    assert_equal [84, 71, 3, 7],  c.normalize_offsets
   end 
 
   def test_rotations
@@ -69,20 +56,10 @@ class CrackTest < Minitest::Test
     assert_equal [7, 84, 71, 3],  c.rotated_differences
   end 
 
-  def test_cracked_key
-    skip
-    c = Crack.new("$gP15")
-    assert_equal [784713],  c.cracked_key
-  end 
-
-
-
-
-
-
-
-
-
+  def test_crack_key_on_original_message_equals_0
+    c = Crack.new("nd..")
+    assert_equal 0, c.crack_key
+  end
 
 end 
 
