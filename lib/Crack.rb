@@ -2,19 +2,15 @@ require 'pry'
 require './lib/characters'
 require './lib/Translator'
 
+
 class Crack
 
+attr_accessor :cracked
+  
   def initialize(message, date = nil)
     @message = message
     @characters = Characters.new
-  end 
-
-  def message_length
-    @message.length
-  end 
-
-  def modulo_length
-    @message.length % 4 
+    @cracked = []
   end 
 
   def intercepted_indices
@@ -26,22 +22,22 @@ class Crack
     return indices.last(4)
   end 
 
-  def find_offsets
-    end_pattern = [78, 68, 14, 14]
-    offsets = []
+  def cracked_offsets
+    known_pattern = [78, 68, 14, 14]
     intercepted_indices.each_with_index do |num, index|
-      offsets << ((num - end_pattern[index]) % @characters.character_map_length)
-      end 
-    return offsets 
-  end
+      @cracked << ((num - known_pattern[index]) % 91)
+    end 
+  end 
   
-  def rotated_differences
-    adjust = (modulo_length * -1)
-    find_offsets.rotate!(adjust)
+  def rotate_offsets
+    crack = cracked_offsets
+    turns = (@message.length % 4)
+    adjust = (turns * -1)
+    crack.rotate!(adjust)
   end
 
   def crack_key
-    cracked_key = rotated_differences.join.to_s.squeeze.to_i 
+    cracked_key = rotate_offsets
     return cracked_key
   end 
 
