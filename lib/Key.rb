@@ -32,10 +32,9 @@ attr_reader :key, :message, :date
 
 
 
-  def date_offset      #0225
+  def date_offset      #0225 
 
     formatted_date = date.strftime("%d%m%y").to_i
-    #@date = 271015
     squared_date = formatted_date ** 2
     date_offsets = squared_date.to_s[-4..-1]
     date_offsets = date_offsets.split("")
