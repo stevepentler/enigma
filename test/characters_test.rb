@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require '../lib/Characters'
+require './lib/Characters'
 require 'pry'
 
 class CharactersTest < Minitest::Test

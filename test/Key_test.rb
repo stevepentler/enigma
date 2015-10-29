@@ -1,7 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require '../lib/Key'
+require './lib/Key'
 require 'pry' 
 
 class KeyDuplicateTest < Minitest::Test
@@ -9,6 +9,16 @@ class KeyDuplicateTest < Minitest::Test
   def test_date_output
     set = Key.new(71215)
     assert_equal 4, set.date_offset.length
+  end 
+
+  def test_generate_key_if_not_added
+    set = Key.new()
+    assert_equal 5, set.generate_key
+  end 
+
+  def test_generate_key_if_zero
+    set = Key.new(00000)
+    assert set.generate_key
   end 
 
   def test_initial_key_length
@@ -32,6 +42,11 @@ class KeyDuplicateTest < Minitest::Test
   def test_date_offset_length
     set = Key.new(71215)
     assert_equal 4, set.date_offset.length
+  end 
+
+  def test_date_offset_length_for_Oct_2015
+    set = Key.new(71215)
+    assert_equal ["0", "2", "2", "5"], set.date_offset
   end 
 
   def test_rotors_length

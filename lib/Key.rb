@@ -11,7 +11,8 @@ attr_reader :key, :message, :date
   end 
 
   def generate_key
-    if @key == nil 
+    if @key == nil || @key == 0
+      @key = []
       5.times do |array| 
         @key << rand(10)
       end 
@@ -27,14 +28,12 @@ attr_reader :key, :message, :date
     key_offsets << key_holder[1..2].join
     key_offsets << key_holder[2..3].join
     key_offsets << key_holder[3..4].join
-    
     return key_offsets 
   end 
 
   def date_offset      #0225
-    #@date = date.strftime("%d%m%y").to_i
-    @date = 271015
-    squared_date = @date ** 2
+    formatted_date = date.strftime("%d%m%y").to_i
+    squared_date = formatted_date ** 2
     date_offsets = squared_date.to_s[-4..-1]
     date_offsets = date_offsets.split("")
     return date_offsets
